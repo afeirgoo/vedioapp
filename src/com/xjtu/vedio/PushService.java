@@ -42,8 +42,8 @@ public class PushService extends Service {
 	public void onCreate() {
 		Log.i(TAG, "---->onCreate");
 		builder = new Notification.Builder(this);
-		Intent mIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://113.200.115.170:4101/VedioServer/rest/restService/download/175.jpg"));
-		pendingIntent = PendingIntent.getActivity(this, 0, mIntent, 0);
+		//Intent mIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://113.200.115.170:4101/VedioServer/rest/restService/download/175.jpg"));
+		//pendingIntent = PendingIntent.getActivity(this, 0, mIntent, 0);
 		init();
 	}
 
@@ -102,6 +102,17 @@ public class PushService extends Service {
 				public void messageArrived(String topicName, MqttMessage message) throws Exception {
 					// subscribe后得到的消息会执行到这里�?
 					Log.i(TAG, "messageArrived----------"+message.toString());
+					String filename = message.toString();
+					String []a = filename.split(":");
+					if(a.length < 2)
+					{
+						Log.i(TAG, "Message Error.");
+					}
+					else
+					{
+						MainActivity.picname = a[1];
+					}
+					
 					/*Message msg = new Message();
 					msg.what = 1;
 					msg.obj = topicName + "---" + message.toString();
@@ -127,7 +138,7 @@ public class PushService extends Service {
 					 builder.setLargeIcon(BitmapFactory.decodeResource(getResources(),R.drawable.mail));
 					 builder.setAutoCancel(true);
 					 builder.setContentTitle("��֪ͨͨ");
-					 
+					 builder.setContentText(message.toString());
 					 mNotificationManager.notify(0, builder.build());
 					 
 					//mNotificationManager.notify(1, baseNF);

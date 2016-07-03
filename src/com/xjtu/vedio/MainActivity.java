@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {	
 	private Button mButton;
+	static String picname;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

@@ -17,7 +17,7 @@ import android.widget.ImageView;
 
 public class PictureView extends Activity {
 	private int ANDROID_ACCESS_CXF_WEBSERVICES = 001; 
-	String imageUrl = "http://113.200.115.170:4101/VedioServer/rest/restService/download/3.jpg";  
+	String imageUrl = "http://113.200.115.170:4101/VedioServer/rest/restService/download/";  
 	 Bitmap bmImg;  
 	 ImageView imView; 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +36,9 @@ public class PictureView extends Activity {
 	    @Override
 	    public void run() {
 	      Looper.prepare();
+	      imageUrl += "567443/";
+	      imageUrl += MainActivity.picname;
+	      imageUrl += ".jpg";
 	      bmImg = returnBitMap(imageUrl);
 	      Message message = new Message();  
           message.what = 1;  
